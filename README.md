@@ -13,5 +13,10 @@
 - Testes de unidade
 - Testes de integração
 - Testes subcutâneos
+- Teste e2e
 - JUnit
 - AssertJ
+
+## Material
+
+- [Tipos de testes](https://whimsical.com/tipos-de-teste-automatizado-XkSqgpqWZwnPaF1Kgz1maB)
