@@ -1,0 +1,9 @@
+### CREATE planet
+POST http://localhost:8080/planets
+Content-Type: application/json
+
+{
+  "name": "name test",
+  "climate": "climate test",
+  "terrain": "terrain test"
+}
