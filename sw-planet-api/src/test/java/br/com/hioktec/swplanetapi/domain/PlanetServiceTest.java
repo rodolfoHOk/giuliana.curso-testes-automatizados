@@ -12,7 +12,6 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 import java.util.Collections;
@@ -24,6 +23,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -118,19 +118,18 @@ public class PlanetServiceTest {
 
   @Test
   public void removePlanet_WithExistingId_DoesNotThrowAnyException() {
-    doNothing().when(planetRepository).deleteById(EXISTING_ID);
+    when(planetRepository.findById(EXISTING_ID)).thenReturn(Optional.of(PLANET));
+    doNothing().when(planetRepository).delete(any());
 
     assertThatCode(() -> planetService.remove(EXISTING_ID)).doesNotThrowAnyException();
   }
 
   @Test
   public void removePlanet_WithNonexistingId_ThrowsException() {
-    doThrow(RuntimeException.class)
-      .when(planetRepository)
-      .deleteById(NONEXISTING_ID);
-
+    when(planetRepository.findById(NONEXISTING_ID)).thenReturn(Optional.empty());
+    
     assertThatThrownBy(() -> planetService.remove(NONEXISTING_ID))
-      .isInstanceOf(RuntimeException.class);
+      .isInstanceOf(EmptyResultDataAccessException.class);
   }
 
 }
