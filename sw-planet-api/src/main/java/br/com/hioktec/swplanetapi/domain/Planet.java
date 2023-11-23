@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "planets")
@@ -17,12 +18,15 @@ public class Planet {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
+  @NotEmpty
   @Column(length = 50, nullable = false, unique = true)
   private String name;
 
+  @NotEmpty
   @Column(length = 150, nullable = false)
   private String climate;
 
+  @NotEmpty
   @Column(length = 150, nullable = false)
   private String terrain;
 

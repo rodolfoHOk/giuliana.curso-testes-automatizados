@@ -2,14 +2,14 @@ package br.com.hioktec.swplanetapi.domain;
 
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.PLANET;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-// import org.springframework.boot.test.context.SpringBootTest;
 
-// @SpringBootTest(classes = PlanetRepository.class) // com @DataJpaTest nãp precisa mais
+
 @DataJpaTest
 public class PlanetRepositoryTest {
 
@@ -31,6 +31,17 @@ public class PlanetRepositoryTest {
     assertThat(sut.getName()).isEqualTo(PLANET.getName());
     assertThat(sut.getClimate()).isEqualTo(PLANET.getClimate());
     assertThat(sut.getTerrain()).isEqualTo(PLANET.getTerrain());
+  }
+
+  @Test
+  public void createPlanet_WithInValidData_ThrowsException() { 
+    Planet emptyPlanet = new Planet();
+    Planet invalidPlanet = new Planet("", "", "");
+
+    assertThatThrownBy(() -> planetRepository.save(emptyPlanet))
+      .isInstanceOf(RuntimeException.class);
+    assertThatThrownBy(() -> planetRepository.save(invalidPlanet))
+      .isInstanceOf(RuntimeException.class);
   }
 
 }
