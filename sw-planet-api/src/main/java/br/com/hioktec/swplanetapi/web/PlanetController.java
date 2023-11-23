@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hioktec.swplanetapi.domain.Planet;
 import br.com.hioktec.swplanetapi.domain.PlanetService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/planets")
@@ -27,7 +28,7 @@ public class PlanetController {
   }
 
   @PostMapping
-  public ResponseEntity<Planet> create(@RequestBody Planet planet) {
+  public ResponseEntity<Planet> create(@RequestBody @Valid Planet planet) {
     var planetCreated = planetService.create(planet);
     return ResponseEntity.status(HttpStatus.CREATED).body(planetCreated);
   }
