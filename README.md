@@ -32,4 +32,6 @@
 
 - [Cenário de teste consulta de planeta completo](files/Cenarios-de-Teste-Consulta-de-Planeta-Completo.png)
 
+- [Cenário de teste listagem de planetas](files/Cenarios-de-Teste-Listagem-de-Planetas.png)
+
 -

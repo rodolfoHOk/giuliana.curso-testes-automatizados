@@ -1,7 +1,9 @@
 package br.com.hioktec.swplanetapi.domain;
 
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,6 +25,12 @@ public class PlanetService {
 
   public Optional<Planet> searchByName(String name) {
     return planetRepository.findByName(name);
+  }
+
+  public List<Planet> listBy(String climate, String terrain) {
+    Example<Planet> query = QueryBuilder
+      .makeQuery(new Planet(climate, terrain));
+    return planetRepository.findAll(query);
   }
   
 }

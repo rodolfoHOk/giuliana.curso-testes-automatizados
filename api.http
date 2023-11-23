@@ -13,3 +13,15 @@ GET http://localhost:8080/planets/1
 
 ### Search planet By Name
 GET http://localhost:8080/planets/name/name-test
+
+### List all planets
+GET http://localhost:8080/planets
+
+### List planets by terrain
+GET http://localhost:8080/planets?terrain=terrain-test
+
+### List planets by climate
+GET http://localhost:8080/planets?climate=climate-test
+
+### List planets by climate and terrain
+GET http://localhost:8080/planets?climate=climate-test&terrain=terrain-test
