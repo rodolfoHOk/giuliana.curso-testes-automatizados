@@ -1,8 +1,10 @@
 package br.com.hioktec.swplanetapi.domain;
 
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.EXISTING_ID;
+import static br.com.hioktec.swplanetapi.common.PlanetConstants.EXISTING_NAME;
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.INVALID_PLANET;
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.NONEXISTING_ID;
+import static br.com.hioktec.swplanetapi.common.PlanetConstants.NONEXISTING_NAME;
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.PLANET;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -59,6 +61,25 @@ public class PlanetServiceTest {
     when(planetRepository.findById(NONEXISTING_ID)).thenReturn(Optional.empty());
 
     Optional<Planet> sut = planetService.searchById(NONEXISTING_ID);
+
+    assertThat(sut).isEmpty();
+  }
+
+  @Test
+  public void searchPlanetByName_ByExistingName_ReturnsPlanet() {
+    when(planetRepository.findByName(EXISTING_NAME)).thenReturn(Optional.of(PLANET));
+
+    Optional<Planet> sut = planetService.searchByName(EXISTING_NAME);
+
+    assertThat(sut).isPresent();
+    assertThat(sut.get()).isEqualTo(PLANET);
+  }
+
+  @Test
+  public void searchPlanetByName_ByNonexistingName_ReturnsEmpty() {
+    when(planetRepository.findByName(NONEXISTING_NAME)).thenReturn(Optional.empty());
+
+    Optional<Planet> sut = planetService.searchByName(NONEXISTING_NAME);
 
     assertThat(sut).isEmpty();
   }
