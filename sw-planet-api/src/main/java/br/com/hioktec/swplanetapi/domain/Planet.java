@@ -26,6 +26,9 @@ public class Planet {
   @Column(length = 150, nullable = false)
   private String terrain;
 
+  public Planet() {
+  }
+
   public Planet(String name, String climate, String terrain) {
     this.name = name;
     this.climate = climate;

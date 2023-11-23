@@ -7,3 +7,6 @@ Content-Type: application/json
   "climate": "climate test",
   "terrain": "terrain test"
 }
+
+### Search planet By ID
+GET http://localhost:8080/planets/1

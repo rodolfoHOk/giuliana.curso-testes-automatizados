@@ -1,5 +1,7 @@
 package br.com.hioktec.swplanetapi.domain;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,4 +17,7 @@ public class PlanetService {
     return planetRepository.save(planet);
   }
 
+  public Optional<Planet> searchById(Long id) {
+    return planetRepository.findById(id);
+  }
 }
