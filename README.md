@@ -19,6 +19,8 @@
 - Dummy / Fake / Stub / Spy / Mock
 - SpringBootTest
 - Mockito
+- DataJpaTest
+- WebMvcTest
 
 ## Material
 
