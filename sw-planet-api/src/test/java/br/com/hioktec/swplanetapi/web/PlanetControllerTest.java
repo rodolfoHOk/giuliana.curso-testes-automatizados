@@ -62,4 +62,15 @@ public class PlanetControllerTest {
       .andExpect(status().isUnprocessableEntity());
   }
 
+  @Test
+  public void createPlanet_WithExistingName_ReturnsConflict() throws Exception {
+    when(planetService.create(any())).thenThrow(DataIntegrityViolationException.class);
+
+    mockMvc
+      .perform(post("/planets")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(objectMapper.writeValueAsString(PLANET)))
+      .andExpect(status().isConflict());
+  }
+
 }

@@ -25,3 +25,6 @@ GET http://localhost:8080/planets?climate=climate-test
 
 ### List planets by climate and terrain
 GET http://localhost:8080/planets?climate=climate-test&terrain=terrain-test
+
+### Remove planet
+DELETE http://localhost:8080/planets/3
