@@ -16,6 +16,11 @@ public class PlanetConstants {
     ""
   );
 
+  public static final Planet QUERY_PLANET = new Planet(
+    "climate_test",
+    "terrain_test"
+  );
+
   public static final Long EXISTING_ID = 1L;
 
   public static final Long NONEXISTING_ID = 1000L;

@@ -6,10 +6,14 @@ import static br.com.hioktec.swplanetapi.common.PlanetConstants.INVALID_PLANET;
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.NONEXISTING_ID;
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.NONEXISTING_NAME;
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.PLANET;
+import static br.com.hioktec.swplanetapi.common.PlanetConstants.QUERY_PLANET;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -82,6 +86,31 @@ public class PlanetServiceTest {
     Optional<Planet> sut = planetService.searchByName(NONEXISTING_NAME);
 
     assertThat(sut).isEmpty();
+  }
+
+  @Test
+  public void listPlanets_ReturnAllPlanets() {
+    var query = QueryBuilder.makeQuery(QUERY_PLANET);
+    when(planetRepository.findAll(query)).thenReturn(List.of(PLANET));
+
+    List<Planet> sut = planetService.listBy(
+      QUERY_PLANET.getClimate(),
+      QUERY_PLANET.getTerrain()
+    );
+
+    assertThat(sut).isNotEmpty();
+    assertThat(sut).hasSize(1);
+    assertThat(sut.get(0)).isEqualTo(PLANET);
+  }
+
+   @Test
+  public void listPlanets_ReturnNoPlanets() {
+    when(planetRepository.findAll(any())).thenReturn(Collections.emptyList());
+
+    List<Planet> sut = planetService.listBy("", "");
+
+    assertThat(sut).isEmpty();
+    assertThat(sut).hasSize(0);
   }
 
 }
