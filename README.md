@@ -38,5 +38,3 @@
 - [Cenário de teste listagem de planetas](files/Cenarios-de-Teste-Listagem-de-Planetas.png)
 
 - [Cenário de teste remoção de planeta](files/Cenarios-de-Teste-Remocao-de-Planeta.png)
-
--
