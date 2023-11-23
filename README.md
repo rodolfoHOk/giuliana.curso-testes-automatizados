@@ -22,6 +22,8 @@
 
 - [Tipos de testes](https://whimsical.com/tipos-de-teste-automatizado-XkSqgpqWZwnPaF1Kgz1maB)
 
-- [Cenários de teste](files/Cenarios-de-Teste-Cadastro-de-Planeta.png)
+- [Cenário de teste criação de planeta](files/Cenarios-de-Teste-Cadastro-de-Planeta.png)
 
 - [Dublês de teste](https://whimsical.com/dubles-de-teste-BnVqRZNUeHWpCV3FKzXsgt)
+
+- [Cenário de teste consulta de planeta](files/Cenários-de-Teste-Consulta-de-Planeta.png)

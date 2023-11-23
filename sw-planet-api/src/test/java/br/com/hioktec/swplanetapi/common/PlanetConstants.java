@@ -16,4 +16,8 @@ public class PlanetConstants {
     ""
   );
 
+  public static final Long EXISTING_ID = 1L;
+
+  public static final Long NONEXISTING_ID = 1000L;
+
 }
