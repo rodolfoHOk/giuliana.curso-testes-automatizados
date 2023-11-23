@@ -1,5 +1,7 @@
 package br.com.hioktec.swplanetapi.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +25,12 @@ public class Planet {
 
   @Column(length = 150, nullable = false)
   private String terrain;
+
+  public Planet(String name, String climate, String terrain) {
+    this.name = name;
+    this.climate = climate;
+    this.terrain = terrain;
+  }
 
   public Long getId() {
     return id;
@@ -54,6 +62,11 @@ public class Planet {
 
   public void setTerrain(String terrain) {
     this.terrain = terrain;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    return EqualsBuilder.reflectionEquals(obj, this);
   }
 
 }

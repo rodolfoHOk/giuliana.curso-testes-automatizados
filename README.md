@@ -16,7 +16,12 @@
 - Teste e2e
 - JUnit
 - AssertJ
+- Dummy / Fake / Stub / Spy / Mock
 
 ## Material
 
 - [Tipos de testes](https://whimsical.com/tipos-de-teste-automatizado-XkSqgpqWZwnPaF1Kgz1maB)
+
+- [Cenários de teste](files/Cenarios-de-Teste-Cadastro-de-Planeta.png)
+
+- [Dublês de teste](https://whimsical.com/dubles-de-teste-BnVqRZNUeHWpCV3FKzXsgt)
