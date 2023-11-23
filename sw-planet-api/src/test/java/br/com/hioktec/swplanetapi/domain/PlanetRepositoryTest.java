@@ -6,6 +6,7 @@ import static br.com.hioktec.swplanetapi.common.PlanetConstants.NONEXISTING_NAME
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.PLANET;
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.TATOOINE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
@@ -134,6 +135,27 @@ public class PlanetRepositoryTest {
     List<Planet> sut = planetRepository.findAll(query);
 
     assertThat(sut).isEmpty();
+  }
+
+  @Test
+  public void removePlanet_WithExistingId_RemovePlanetFromDatabase() {
+    Planet planet = testEntityManager.persistFlushFind(PLANET);
+
+    planetRepository.deleteById(planet.getId());
+
+    Planet removedPlanet = testEntityManager.find(Planet.class, planet.getId());
+    assertThat(removedPlanet).isNull();
+  }
+
+  @Test
+  public void removePlanet_WithNonexistingId_NotThrowsException() {
+    Planet planet = testEntityManager.persistFlushFind(PLANET);
+    assertThat(testEntityManager.find(Planet.class, NONEXISTING_ID)).isNull();
+   
+    assertThatNoException()
+      .isThrownBy(() -> planetRepository.deleteById(NONEXISTING_ID));
+
+    assertThat(testEntityManager.find(Planet.class, planet.getId())).isNotNull();
   }
 
 }

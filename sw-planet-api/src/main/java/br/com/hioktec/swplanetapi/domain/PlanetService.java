@@ -3,6 +3,7 @@ package br.com.hioktec.swplanetapi.domain;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,12 @@ public class PlanetService {
   }
 
   public void remove(Long id) {
-    planetRepository.deleteById(id);
+    var planetOptional = searchById(id);
+    if (planetOptional.isPresent()) {
+      planetRepository.delete(planetOptional.get());
+    } else {
+      throw new EmptyResultDataAccessException("Entity not found", 1);
+    }
   }
   
 }

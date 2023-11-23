@@ -1,6 +1,7 @@
 package br.com.hioktec.swplanetapi.web;
 
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -33,5 +34,13 @@ public class GeneralExceptionHandler extends ResponseEntityExceptionHandler {
       WebRequest request
   ) {
     return handleExceptionInternal(ex, "Planet already exists", new HttpHeaders(), HttpStatus.CONFLICT, request);
+  }
+
+  @ExceptionHandler(EmptyResultDataAccessException.class)
+  protected ResponseEntity<Object> handleEmptyResultDataAccess(
+      EmptyResultDataAccessException ex,
+      WebRequest request
+  ) {
+    return handleExceptionInternal(ex, ex.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
   }
 }
