@@ -1,6 +1,7 @@
 package br.com.hioktec.swplanetapi.domain;
 
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.NONEXISTING_ID;
+import static br.com.hioktec.swplanetapi.common.PlanetConstants.NONEXISTING_NAME;
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.PLANET;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -76,6 +77,23 @@ public class PlanetRepositoryTest {
   @Test
   public void getPlanetById_ByNonexistingId_ReturnsEmpty() throws Exception {
     Optional<Planet> sut = planetRepository.findById(NONEXISTING_ID);
+
+    assertThat(sut).isEmpty();
+  }
+
+  @Test
+  public void getPlanetByName_ByExistingName_ReturnsPlanet() throws Exception {
+    Planet planet = testEntityManager.persistFlushFind(PLANET);
+
+    Optional<Planet> sut = planetRepository.findByName(planet.getName());
+
+    assertThat(sut).isPresent();
+    assertThat(sut.get()).isEqualTo(planet);
+  }
+
+  @Test
+  public void getPlanetByName_ByNonexistingName_ReturnsEmpty() throws Exception {
+    Optional<Planet> sut = planetRepository.findByName(NONEXISTING_NAME);
 
     assertThat(sut).isEmpty();
   }

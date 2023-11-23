@@ -2,6 +2,7 @@ package br.com.hioktec.swplanetapi.web;
 
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.EXISTING_ID;
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.NONEXISTING_ID;
+import static br.com.hioktec.swplanetapi.common.PlanetConstants.NONEXISTING_NAME;
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.PLANET;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -92,6 +93,23 @@ public class PlanetControllerTest {
   public void getPlanetById_ByNonexistingId_ReturnsNotFound() throws Exception {
     mockMvc
       .perform(get("/planets/" + NONEXISTING_ID))
+      .andExpect(status().isNotFound());
+  }
+
+  @Test
+  public void getPlanetByName_ByExistingName_ReturnsOkAndPlanet() throws Exception {
+    when(planetService.searchByName(PLANET.getName())).thenReturn(Optional.of(PLANET));
+
+    mockMvc
+      .perform(get("/planets/name/" + PLANET.getName()))
+      .andExpect(status().isOk())
+      .andExpect(jsonPath("$").value(PLANET));
+  }
+
+  @Test
+  public void getPlanetByName_ByNonexistingName_ReturnsNotFound() throws Exception {
+    mockMvc
+      .perform(get("/planets/name/" + NONEXISTING_NAME))
       .andExpect(status().isNotFound());
   }
 
