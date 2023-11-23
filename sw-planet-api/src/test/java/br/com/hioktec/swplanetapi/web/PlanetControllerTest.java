@@ -1,11 +1,16 @@
 package br.com.hioktec.swplanetapi.web;
 
+import static br.com.hioktec.swplanetapi.common.PlanetConstants.EXISTING_ID;
+import static br.com.hioktec.swplanetapi.common.PlanetConstants.NONEXISTING_ID;
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.PLANET;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,6 +76,23 @@ public class PlanetControllerTest {
         .contentType(MediaType.APPLICATION_JSON)
         .content(objectMapper.writeValueAsString(PLANET)))
       .andExpect(status().isConflict());
+  }
+
+  @Test
+  public void getPlanetById_ByExistingId_ReturnsOkAndPlanet() throws Exception {
+    when(planetService.searchById(EXISTING_ID)).thenReturn(Optional.of(PLANET));
+
+    mockMvc
+      .perform(get("/planets/" + EXISTING_ID))
+      .andExpect(status().isOk())
+      .andExpect(jsonPath("$").value(PLANET));
+  }
+
+  @Test
+  public void getPlanetById_ByNonexistingId_ReturnsNotFound() throws Exception {
+    mockMvc
+      .perform(get("/planets/" + NONEXISTING_ID))
+      .andExpect(status().isNotFound());
   }
 
 }
