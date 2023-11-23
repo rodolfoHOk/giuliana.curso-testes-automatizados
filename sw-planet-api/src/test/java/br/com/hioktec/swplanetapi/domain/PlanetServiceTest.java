@@ -8,8 +8,11 @@ import static br.com.hioktec.swplanetapi.common.PlanetConstants.NONEXISTING_NAME
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.PLANET;
 import static br.com.hioktec.swplanetapi.common.PlanetConstants.QUERY_PLANET;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
 import java.util.Collections;
@@ -103,7 +106,7 @@ public class PlanetServiceTest {
     assertThat(sut.get(0)).isEqualTo(PLANET);
   }
 
-   @Test
+  @Test
   public void listPlanets_ReturnNoPlanets() {
     when(planetRepository.findAll(any())).thenReturn(Collections.emptyList());
 
@@ -111,6 +114,23 @@ public class PlanetServiceTest {
 
     assertThat(sut).isEmpty();
     assertThat(sut).hasSize(0);
+  }
+
+  @Test
+  public void removePlanet_WithExistingId_DoesNotThrowAnyException() {
+    doNothing().when(planetRepository).deleteById(EXISTING_ID);
+
+    assertThatCode(() -> planetService.remove(EXISTING_ID)).doesNotThrowAnyException();
+  }
+
+  @Test
+  public void removePlanet_WithNonexistingId_ThrowsException() {
+    doThrow(RuntimeException.class)
+      .when(planetRepository)
+      .deleteById(NONEXISTING_ID);
+
+    assertThatThrownBy(() -> planetService.remove(NONEXISTING_ID))
+      .isInstanceOf(RuntimeException.class);
   }
 
 }
