@@ -10,4 +10,10 @@ public class PlanetConstants {
     "terrain_test"
   );
 
+  public static final Planet INVALID_PLANET = new Planet(
+    "",
+    "",
+    ""
+  );
+
 }
