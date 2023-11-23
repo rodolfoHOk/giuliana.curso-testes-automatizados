@@ -17,6 +17,8 @@
 - JUnit
 - AssertJ
 - Dummy / Fake / Stub / Spy / Mock
+- SpringBootTest
+- Mockito
 
 ## Material
 
@@ -27,3 +29,7 @@
 - [Dublês de teste](https://whimsical.com/dubles-de-teste-BnVqRZNUeHWpCV3FKzXsgt)
 
 - [Cenário de teste consulta de planeta](files/Cenários-de-Teste-Consulta-de-Planeta.png)
+
+- [Cenário de teste consulta de planeta completo](files/Cenarios-de-Teste-Consulta-de-Planeta-Completo.png)
+
+-

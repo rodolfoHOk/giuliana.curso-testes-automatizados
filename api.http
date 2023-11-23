@@ -3,10 +3,13 @@ POST http://localhost:8080/planets
 Content-Type: application/json
 
 {
-  "name": "name test",
-  "climate": "climate test",
-  "terrain": "terrain test"
+  "name": "name-test",
+  "climate": "climate-test",
+  "terrain": "terrain-test"
 }
 
 ### Search planet By ID
 GET http://localhost:8080/planets/1
+
+### Search planet By Name
+GET http://localhost:8080/planets/name/name-test

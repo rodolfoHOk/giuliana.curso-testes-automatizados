@@ -20,4 +20,9 @@ public class PlanetService {
   public Optional<Planet> searchById(Long id) {
     return planetRepository.findById(id);
   }
+
+  public Optional<Planet> searchByName(String name) {
+    return planetRepository.findByName(name);
+  }
+  
 }
