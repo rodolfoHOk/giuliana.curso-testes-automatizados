@@ -42,6 +42,7 @@
 - Jacoco
 - Pitest
 - TestContainers
+- ParameterizedTest
 
 ## Material
 
