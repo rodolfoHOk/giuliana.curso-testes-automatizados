@@ -118,3 +118,7 @@ Pitest Mutation Coverage
 ```sh
 $ ./mvnw test-compile org.pitest:pitest-maven:mutationCoverage
 ```
+
+## Certificado
+
+![Certificado](https://raw.githubusercontent.com/rodolfoHOk/portfolio-img/main/images/certificado-udemy-testes-automatizados-com-spring.jpg)
