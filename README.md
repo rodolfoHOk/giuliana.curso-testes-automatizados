@@ -20,8 +20,10 @@
 - SpringBootTest
 - Mockito
 - DataJpaTest
-- WebMvcTest
+- WebMvcTest / MockMvc
 - Hamcrest
+- TestRestTemplate
+- WebTestClient
 
 ## Material
 
