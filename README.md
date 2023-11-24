@@ -38,6 +38,7 @@
 - Hamcrest
 - TestRestTemplate
 - WebTestClient
+- Jacoco
 
 ## Material
 
@@ -100,4 +101,10 @@ ou
 
 ```sh
 $ ./mvnw clean test
+```
+
+Cobertura de testes
+
+```sh
+$ ./mvnw clean test jacoco:report
 ```
