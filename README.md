@@ -39,6 +39,7 @@
 - TestRestTemplate
 - WebTestClient
 - Jacoco
+- Pitest
 
 ## Material
 
@@ -107,4 +108,10 @@ Cobertura de testes
 
 ```sh
 $ ./mvnw clean test jacoco:report
+```
+
+Pitest Mutation Coverage
+
+```sh
+$ ./mvnw test-compile org.pitest:pitest-maven:mutationCoverage
 ```
